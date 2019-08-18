@@ -52,7 +52,7 @@ class sneaker_site:
         r = requests.get(self.url)
         self.soup = BeautifulSoup(r.content, "html.parser")
         
-        print("\nConsolidating all hyperlinks and paragraphs in the webpage \n" )        
+        print("\nConsolidating all hyperlinks and paragraphs for", self.name)        
         self.hyperlink_list = self.soup.findAll('a')
         self.paragraph_list = self.soup.findAll('p')
         
@@ -83,14 +83,24 @@ class sneaker_site:
         print("Total Nike mentions: ", self.nike_site_count)
         print("Total Adidas mentions: ", self.adidas_site_count)
         print("Total New Balance mentions: ", self.new_balance_site_count)
-        print("Total Puma mentions: ", self.puma_site_count)       
-        print(self.lines)          
+        print("Total Puma mentions: ", self.puma_site_count)                
   
 #----------------------------------- START -----------------------------------#
 #-------------------------- PHASE 2: Execution area --------------------------#
 #-----------------------------------------------------------------------------#
 
-sneaker_news = sneaker_site('sneakernews.com', 'https://sneakernews.com/')
+sneaker_news = sneaker_site('sneaker_news', 'https://sneakernews.com/')
 sneaker_news.site_calculate()
 sneaker_news.display_info()
 
+kicks_on_fire = sneaker_site('kicks_on_fire', 'https://www.kicksonfire.com/')
+kicks_on_fire.site_calculate()
+kicks_on_fire.display_info()
+
+sole_collector = sneaker_site('sole_collector', 'https://solecollector.com/')
+sole_collector.site_calculate()
+sole_collector.display_info()
+
+hypebeast = sneaker_site('hypebeast', 'https://hypebeast.com/')
+hypebeast.site_calculate()
+hypebeast.display_info()
