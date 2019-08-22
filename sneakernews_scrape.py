@@ -17,8 +17,10 @@ VERSION: 1.0
 # import the required modules
 import nltk 
 import requests
+import csv
 import pandas as pd
 import datetime
+import pprint
 from datetime import date 
 from bs4 import BeautifulSoup
 from collections import Counter
@@ -31,11 +33,12 @@ class sneaker_site:
         self.url = url
         self.site_text = ''
         self.lines = ''
-        self.site_df = pd.DataFrame(columns = ['date', 'dtg','category_name', 'item', 'count'])
+        self.site_df = pd.DataFrame(columns = ['dtg', 'date','year', 'month', 'day', 'category_name', 'item', 'count'])
         
         self.soup = ''
         self.hyperlink_list = ''
         self.paragraph_list = ''
+        self.bold_list = ''
         
         self.nike_site_count = 0
         self.adidas_site_count = 0
@@ -62,6 +65,7 @@ class sneaker_site:
         print("\nConsolidating all hyperlinks and paragraphs for", self.name)        
         self.hyperlink_list = self.soup.findAll('a')
         self.paragraph_list = self.soup.findAll('p')
+        self.bold_list = self.soup.findAll('b')
         
         self.site_text = self.soup.get_text()
         print("\nConverting ", self.name, " to text file ... \n")
@@ -70,12 +74,18 @@ class sneaker_site:
         print("\nCalculating individual counts: " )
         
         index_num = 0
+
         for item in self.sneaker_list:
             name = item + ': '
             count = self.site_text.count(item)
-            day = date.today()
+            today = date.today()
             dtg = datetime.datetime.now()
+            year = dtg.year
+            month = dtg.month
+            day_num = dtg.day
+
             category = ''
+            
             if count > 0:
                 if item in self.nike_master:
                     self.nike_site_count += count
@@ -102,7 +112,7 @@ class sneaker_site:
                     category = 'Puma'
                 else: 
                     0                
-            self.site_df.loc[index_num] = [day, dtg, category, item, count]        
+            self.site_df.loc[index_num] = [dtg, today, year, month, day_num, category, item, count]        
             print(name, count)
             index_num += 1
             
@@ -112,8 +122,19 @@ class sneaker_site:
         print("Total Adidas mentions: ", self.adidas_site_count)
         print("Total New Balance mentions: ", self.new_balance_site_count)
         print("Total Puma mentions: ", self.puma_site_count)      
-        print(self.site_df)          
-  
+        print(self.site_df)      
+    
+    def display_links(self):
+        pp = pprint.PrettyPrinter(indent=4)
+        pp.pprint(self.hyperlink_list)
+    
+    def display_paragraphs(self):
+        pp = pprint.PrettyPrinter(indent=4)
+        pp.pprint(self.paragraph_list)
+        
+    def display_bold(self):
+        pp = pprint.PrettyPrinter(indent=4)
+        pp.pprint(self.bold_list)  
 #----------------------------------- START -----------------------------------#
 #-------------------------- PHASE 2: Execution area --------------------------#
 #-----------------------------------------------------------------------------#
@@ -121,6 +142,9 @@ class sneaker_site:
 sneaker_news = sneaker_site('sneaker_news', 'https://sneakernews.com/')
 sneaker_news.site_calculate()
 sneaker_news.display_info()
+sneaker_news.display_links()
+sneaker_news.display_paragraphs()
+sneaker_news.display_bold()
 
 kicks_on_fire = sneaker_site('kicks_on_fire', 'https://www.kicksonfire.com/')
 kicks_on_fire.site_calculate()
