@@ -13,12 +13,20 @@ VERSION: 1.0
 #-----------------------------------------------------------------------------#
 
 
-# 1.1 Normalize Text ------ --------------------------------------------------#
+# 1.1 Normalize Text ---------------------------------------------------------#
 
 def normalize_string(s):
     '''
-    
+    - A function which takes a string as a parameter
+    - returns a new string with all characters converted to lower case and
+    - all non-alphabetic, non-whitespace characters removed
     '''
+    
     assert type (s) is str
+    
+    essential_chars = [c for c in s.lower() if c.isalpha() or c.isspace()]
+    return ''.join(essential_chars)
+
+
     
 
