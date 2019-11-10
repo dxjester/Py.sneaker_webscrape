@@ -35,7 +35,8 @@ class sneaker_site:
         self.url = url
         self.site_text = ''
         self.lines = ''
-        self.site_df = pd.DataFrame(columns = ['dtg', 'date','year', 'month', 'day', 'category_name', 'item', 'count'])
+        self.site_df = pd.DataFrame(columns = ['website','dtg', 'date','year', 'month', 'day', 'category_name', 'item', 'count'])
+        #self.site_df['website'] = self.website_name
         
         self.soup = ''
         self.hyperlink_list = ''
@@ -88,6 +89,7 @@ class sneaker_site:
         index_num = 0
 
         for item in self.sneaker_list:
+            website = self.website_name
             name = item + ': '
             count = self.site_text.count(item)
             today = date.today()
@@ -124,7 +126,7 @@ class sneaker_site:
                     category = 'Puma'
                 else: 
                     0                
-            self.site_df.loc[index_num] = [dtg, today, year, month, day_num, category, item, count]        
+            self.site_df.loc[index_num] = [website, dtg, today, year, month, day_num, category, item, count]        
             print(name, count)
             index_num += 1
         
@@ -141,7 +143,13 @@ class sneaker_site:
         print("Total New Balance mentions: ", self.new_balance_site_count)
         print("Total Puma mentions: ", self.puma_site_count)      
         print(self.site_df)      
-    
+        
+    def display_df(self):
+        '''
+        DESCRIPTION: display class dataframe 
+        '''
+        print(self.site_df)  
+        
     def display_links(self):
         '''
         DESCRIPTION: display hyperlinks for the object
@@ -168,31 +176,35 @@ class sneaker_site:
 #-------------------------- PHASE 2: Execution area --------------------------#
 #-----------------------------------------------------------------------------#
 
-sneaker_news = sneaker_site('sneaker_news', 'https://sneakernews.com/')
+# 2.A: SNEAKERNEWS.com ingest and analysis -----------------------------------#
+sneaker_news = sneaker_site('sneakernews.com', 'https://sneakernews.com/')
 sneaker_news.site_calculate()
+sneaker_news.display_df()
 sneaker_news.display_info()
 #sneaker_news.display_links()
 #sneaker_news.display_paragraphs()
-sneaker_news.display_bold()
+#sneaker_news.display_bold()
 
-kicks_on_fire = sneaker_site('kicks_on_fire', 'https://www.kicksonfire.com/')
+# 2.B: KICKSONFIRE.com ingest and analysis -----------------------------------#
+kicks_on_fire = sneaker_site('kicksonfire.com', 'https://www.kicksonfire.com/')
 kicks_on_fire.site_calculate()
 kicks_on_fire.display_info()
 #kicks_on_fire.display_links()
 #kicks_on_fire.display_paragraphs()
-kicks_on_fire.display_bold()
+#kicks_on_fire.display_bold()
 
-
-sole_collector = sneaker_site('sole_collector', 'https://solecollector.com/')
+# 2.C: SOLECOLLECTOR.com ingest and analysis ---------------------------------#
+sole_collector = sneaker_site('solecollector.com', 'https://solecollector.com/')
 sole_collector.site_calculate()
 sole_collector.display_info()
 #sole_collector.display_links()
 #sole_collector.display_paragraphs()
-sole_collector.display_bold()
+#sole_collector.display_bold()
 
-hypebeast = sneaker_site('hypebeast', 'https://hypebeast.com/')
+# 2.B: HYPEBEAST.com ingest and analysis -------------------------------------#
+hypebeast = sneaker_site('hypebeast.com', 'https://hypebeast.com/')
 hypebeast.site_calculate()
 hypebeast.display_info()
 #hypebeast.display_links()
 #hypebeast.display_paragraphs()
-hypebeast.display_bold()
+#hypebeast.display_bold()
