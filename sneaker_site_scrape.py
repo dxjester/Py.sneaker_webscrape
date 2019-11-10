@@ -36,7 +36,7 @@ class sneaker_site:
         self.site_text = ''
         self.lines = ''
         self.site_df = pd.DataFrame(columns = ['website','dtg', 'date','year', 'month', 'day', 'category_name', 'item', 'count'])
-        #self.site_df['website'] = self.website_name
+        self.site_df['website'] = self.website_name
         
         self.soup = ''
         self.hyperlink_list = ''
@@ -48,21 +48,24 @@ class sneaker_site:
         self.reebok_site_count = 0
         self.new_balance_site_count = 0
         self.puma_site_count = 0
+        self.vans_site_count = 0
 
         self.nike_master = ['Nike', 'Jordan', 'Converse']
         # ['Nike', 'Air', 'Max', 'Jordan', 'Zoom', 'React', 'Shox', 'ACG', 'Max Plus', 'Joyride', 'Tinker', 'Force', 'Westbrook', 'Kyrie','Lebron', 'Durant', 'SB', 'Air Max 90', 'Air Max 97', 'Air Max 1', 'Kyrie', 'Air Max 270', 'Travis Scott' ]
         
-        self.adidas_master = ['Adidas', 'Reebok', 'ADIDAS', 'Yeezy', 'Kanye']
+        self.adidas_master = ['Adidas', 'Reebok', 'ADIDAS', 'Yeezy', 'Kanye', 'adidas', 'kanye', 'yeezy']
         
         # ['Adidas', 'ADIDAS', 'adidas', 'Yeezy', 'Kanye', 'Ultraboost', 'EQT', 'NMD', 'Ultra Boost', 'FYW', 'Harden']
         
-        self.new_balance_master = ['New Balance', 'NB']
+        self.new_balance_master = ['New Balance', 'NB', 'new balance']
         # ['New Balance', 'NB', 'Balance', '997', '801']
         
-        self.puma_master = ['Puma', 'Cell Venom']
+        self.puma_master = ['Puma', 'puma']
         #['Puma', 'Cell Venom', 'Thunder Spectre', 'Clyde Court']
 
-        self.sneaker_list = self.nike_master + self.adidas_master + self.new_balance_master + self.puma_master
+        self.vans_master = ['Vans','vans']
+        
+        self.sneaker_list = self.nike_master + self.adidas_master + self.new_balance_master + self.puma_master + self.vans_master
         self.length = len(self.sneaker_list)         
         print("{} website object created".format(self.website_name))
         
@@ -70,6 +73,7 @@ class sneaker_site:
         '''
         DESCRIPTION: pull the raw data from the website and append in dataframe
         '''
+        
         start_time = time.time()
         print("n Retrieving {} text and data ...".format(self.website_name))
         r = requests.get(self.url)
@@ -113,6 +117,9 @@ class sneaker_site:
                 elif item in self.puma_master:
                     self.puma_site_count += count
                     category = 'Puma'
+                elif item in self.vans_master:
+                    self.vans_site_count += count
+                    category = 'Vans'
                 else: 
                     0
             else: 
@@ -124,6 +131,8 @@ class sneaker_site:
                     category = 'New Balance'
                 elif item in self.puma_master:
                     category = 'Puma'
+                elif item in self.vans_master:
+                    category = 'Vans'
                 else: 
                     0                
             self.site_df.loc[index_num] = [website, dtg, today, year, month, day_num, category, item, count]        
@@ -142,6 +151,7 @@ class sneaker_site:
         print("Total Adidas mentions: ", self.adidas_site_count)
         print("Total New Balance mentions: ", self.new_balance_site_count)
         print("Total Puma mentions: ", self.puma_site_count)      
+        print("Total Vans mentions: ", self.vans_site_count)      
         print(self.site_df)      
         
     def display_df(self):
