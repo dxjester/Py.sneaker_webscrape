@@ -13,7 +13,7 @@ VERSION: 1.0
 #-----------------------------------------------------------------------------#
 
 
-# 1.1 Normalize Text ---------------------------------------------------------#
+# 1.1 Normalize String -------------------------------------------------------#
 
 def normalize_string(s):
     '''
@@ -27,6 +27,22 @@ def normalize_string(s):
     essential_chars = [c for c in s.lower() if c.isalpha() or c.isspace()]
     return ''.join(essential_chars)
 
-
+# 1.2 String to Word list ----------------------------------------------------#
+def str_to_word_list(s):
+    '''
+    - A function which takes a string as a parameter
+    - returns a list of words in s
+    '''
     
+    assert type (s) is str
+    return normalize_string(s).split()
+
+# 1.3 Item Sets --------------------------------------------------------------#
+def make_itemsets(words):
+    '''
+    - A function which takes a list of strings as a parameter
+    - returns a list of item sets for each word in the provided list
+    '''
+    return [set(w) for w in words]
+
 
