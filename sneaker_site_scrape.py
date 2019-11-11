@@ -207,15 +207,17 @@ sneaker_news_df.head(10)
 
 sneaker_news_sliced = sneaker_news_df[['category_name','count']]
 temp = sneaker_news_sliced.groupby(['category_name']).sum()
+temp = temp.sort_values('count', ascending = False)
 sneaker_news_bar = temp.reset_index()
 sneaker_news_bar.head(10)
 
 x_val = sneaker_news_bar['category_name']
 y_val = sneaker_news_bar['count']
 
+cr = ['red', 'grey', 'blue', 'green', 'orange']
 fig = plt.figure()
 ax = fig.add_subplot(111)
-ax.bar(x_val, y_val, color='g', align='center')
+ax.bar(x_val, y_val, align='center', color = cr)
 plt.show()
 
 
