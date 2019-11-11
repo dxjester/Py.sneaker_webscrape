@@ -3,7 +3,7 @@
 FILENAME: text_functions.py
 PROJECT: Sneaker Website Analysis
 DATE CREATED: 10-Nov-19
-DATE UPDATED: 9-Nov-19
+DATE UPDATED: 10-Nov-19
 VERSION: 1.0
 """
 

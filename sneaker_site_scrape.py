@@ -14,7 +14,6 @@ VERSION: 1.0
 
 # 1.1 Module Import ----------------------------------------------------------#
 # import the required modules
-import nltk 
 import requests
 import time
 import pandas as pd
@@ -22,12 +21,14 @@ import datetime
 import pprint
 from datetime import date 
 from bs4 import BeautifulSoup
-from collections import Counter
-from string import punctuation
+# from collections import Counter
+# from string import punctuation
 
 # 1.1 Class Declaration ------------------------------------------------------#
 class sneaker_site:
-    def __init__ (self, name, url):
+    
+    # initialize the class
+    def __init__ (self, name, url): # provide the name of the website and the url
         '''
         DESCRIPTION: initialize class with default class arguments
         '''
@@ -36,7 +37,7 @@ class sneaker_site:
         self.site_text = ''
         self.lines = ''
         self.site_df = pd.DataFrame(columns = ['website','dtg', 'date','year', 'month', 'day', 'category_name', 'item', 'count'])
-        self.site_df['website'] = self.website_name
+        self.site_df['website'] = self.website_name # assign the website name to the entire class dataframe
         
         self.soup = ''
         self.hyperlink_list = ''
@@ -50,25 +51,31 @@ class sneaker_site:
         self.puma_site_count = 0
         self.vans_site_count = 0
 
-        self.nike_master = ['Nike', 'Jordan', 'Converse']
+        # default Nike list
+        self.nike_master = ['Nike', 'Jordan', 'Converse'] 
         # ['Nike', 'Air', 'Max', 'Jordan', 'Zoom', 'React', 'Shox', 'ACG', 'Max Plus', 'Joyride', 'Tinker', 'Force', 'Westbrook', 'Kyrie','Lebron', 'Durant', 'SB', 'Air Max 90', 'Air Max 97', 'Air Max 1', 'Kyrie', 'Air Max 270', 'Travis Scott' ]
-        
+
+        # default Adidas list     
         self.adidas_master = ['Adidas', 'Reebok', 'ADIDAS', 'Yeezy', 'Kanye', 'adidas', 'kanye', 'yeezy']
-        
         # ['Adidas', 'ADIDAS', 'adidas', 'Yeezy', 'Kanye', 'Ultraboost', 'EQT', 'NMD', 'Ultra Boost', 'FYW', 'Harden']
         
+        # default New Balance list
         self.new_balance_master = ['New Balance', 'NB', 'new balance']
         # ['New Balance', 'NB', 'Balance', '997', '801']
         
+        # default Puma LIst
         self.puma_master = ['Puma', 'puma']
         #['Puma', 'Cell Venom', 'Thunder Spectre', 'Clyde Court']
 
+        # default Vans list
         self.vans_master = ['Vans','vans']
         
+        # concatenante the individual sneaker lists into one master list
         self.sneaker_list = self.nike_master + self.adidas_master + self.new_balance_master + self.puma_master + self.vans_master
         self.length = len(self.sneaker_list)         
         print("{} website object created".format(self.website_name))
-        
+    
+    # class function to calculate the counts of list 
     def site_calculate(self):
         '''
         DESCRIPTION: pull the raw data from the website and append in dataframe
