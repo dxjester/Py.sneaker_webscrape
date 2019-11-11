@@ -202,15 +202,23 @@ sneaker_news.display_info()
 #sneaker_news.display_paragraphs()
 #sneaker_news.display_bold()
 
+# retrieve master sneakernews.com dataframe
 sneaker_news_df = sneaker_news.return_df()
 sneaker_news_df.head(10)
 
+
+# 2.A.1: sneakernews.com plotting 
+
+# slice dataframe with 'category_name' and 'count' columns
 sneaker_news_sliced = sneaker_news_df[['category_name','count']]
 temp = sneaker_news_sliced.groupby(['category_name']).sum()
+
+# sort the two column dataframe by descending on count
 temp = temp.sort_values('count', ascending = False)
 sneaker_news_bar = temp.reset_index()
 sneaker_news_bar.head(10)
 
+# begin bar chart plotting
 x_val = sneaker_news_bar['category_name']
 y_val = sneaker_news_bar['count']
 
@@ -218,9 +226,8 @@ cr = ['red', 'grey', 'blue', 'green', 'orange']
 fig = plt.figure()
 ax = fig.add_subplot(111)
 ax.bar(x_val, y_val, align='center', color = cr)
+ax.title.set_text('Sneakernews.com Category Chart')
 plt.show()
-
-
 
 
 
