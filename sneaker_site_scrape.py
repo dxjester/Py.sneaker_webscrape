@@ -21,6 +21,7 @@ import datetime
 import pprint
 from datetime import date 
 from bs4 import BeautifulSoup
+import matplotlib.pyplot as plt
 # from collections import Counter
 # from string import punctuation
 
@@ -161,11 +162,11 @@ class sneaker_site:
         print("Total Vans mentions: ", self.vans_site_count)      
         print(self.site_df)      
         
-    def display_df(self):
+    def return_df(self):
         '''
-        DESCRIPTION: display class dataframe 
+        DESCRIPTION: return class dataframe 
         '''
-        print(self.site_df)  
+        return self.site_df
         
     def display_links(self):
         '''
@@ -196,11 +197,30 @@ class sneaker_site:
 # 2.A: SNEAKERNEWS.com ingest and analysis -----------------------------------#
 sneaker_news = sneaker_site('sneakernews.com', 'https://sneakernews.com/')
 sneaker_news.site_calculate()
-sneaker_news.display_df()
 sneaker_news.display_info()
 #sneaker_news.display_links()
 #sneaker_news.display_paragraphs()
 #sneaker_news.display_bold()
+
+sneaker_news_df = sneaker_news.return_df()
+sneaker_news_df.head(10)
+
+sneaker_news_sliced = sneaker_news_df[['category_name','count']]
+temp = sneaker_news_sliced.groupby(['category_name']).sum()
+sneaker_news_bar = temp.reset_index()
+sneaker_news_bar.head(10)
+
+x_val = sneaker_news_bar['category_name']
+y_val = sneaker_news_bar['count']
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+ax.bar(x_val, y_val, color='g', align='center')
+plt.show()
+
+
+
+
 
 # 2.B: KICKSONFIRE.com ingest and analysis -----------------------------------#
 kicks_on_fire = sneaker_site('kicksonfire.com', 'https://www.kicksonfire.com/')
