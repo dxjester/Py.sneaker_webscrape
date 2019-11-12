@@ -207,7 +207,7 @@ sneaker_news_df = sneaker_news.return_df()
 sneaker_news_df.head(10)
 
 
-# 2.A.1: sneakernews.com plotting 
+# 2.A.1: sneakernews.com bar chart plotting 
 
 # slice dataframe with 'category_name' and 'count' columns
 sneaker_news_sliced = sneaker_news_df[['category_name','count']]
@@ -244,7 +244,7 @@ sole_collector_df = sole_collector.return_df()
 sole_collector_df.head(10)
 
 
-# 2.B.1: sneakernews.com plotting 
+# 2.B.1: Solecollector.com bar chart plotting 
 
 # slice dataframe with 'category_name' and 'count' columns
 sole_collector_sliced = sole_collector_df[['category_name','count']]
@@ -275,3 +275,31 @@ hypebeast.display_info()
 #hypebeast.display_links()
 #hypebeast.display_paragraphs()
 #hypebeast.display_bold()
+
+# retrieve master sneakernews.com dataframe
+hypebeast_df = hypebeast.return_df()
+hypebeast_df.head(10)
+
+
+# 2.C.1: Solecollector.com bar chart plotting 
+
+# slice dataframe with 'category_name' and 'count' columns
+hypebeast_sliced = hypebeast_df[['category_name','count']]
+temp = hypebeast_sliced.groupby(['category_name']).sum()
+
+# sort the two column dataframe by descending on count
+temp = temp.sort_values('count', ascending = False)
+hypebeast_bar = temp.reset_index()
+hypebeast_bar.head(10)
+
+# begin bar chart plotting
+x_val = hypebeast_bar['category_name']
+y_val = hypebeast_bar['count']
+
+cr = ['red', 'grey', 'blue', 'green', 'orange']
+hypebeast_fig = plt.figure()
+hypebeast_ax = hypebeast_fig.add_subplot(111)
+hypebeast_ax.bar(x_val, y_val, align='center', color = cr)
+hypebeast_ax.title.set_text('Hypebeast.com Category Chart')
+plt.show()
+# end bar chart plot
