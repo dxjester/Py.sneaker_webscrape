@@ -83,7 +83,7 @@ class sneaker_site:
         '''
         
         start_time = time.time()
-        print("n Retrieving {} text and data ...".format(self.website_name))
+        print("\nRetrieving {} text and data ...".format(self.website_name))
         r = requests.get(self.url)
         self.soup = BeautifulSoup(r.content, "html.parser")
         
@@ -160,7 +160,7 @@ class sneaker_site:
         print("Total New Balance mentions: ", self.new_balance_site_count)
         print("Total Puma mentions: ", self.puma_site_count)      
         print("Total Vans mentions: ", self.vans_site_count)      
-        print(self.site_df)      
+        # print(self.site_df)      
         
     def return_df(self):
         '''
@@ -223,31 +223,52 @@ x_val = sneaker_news_bar['category_name']
 y_val = sneaker_news_bar['count']
 
 cr = ['red', 'grey', 'blue', 'green', 'orange']
-fig = plt.figure()
-ax = fig.add_subplot(111)
-ax.bar(x_val, y_val, align='center', color = cr)
-ax.title.set_text('Sneakernews.com Category Chart')
+sneaker_news_fig = plt.figure()
+sneaker_news_ax = sneaker_news_fig.add_subplot(111)
+sneaker_news_ax.bar(x_val, y_val, align='center', color = cr)
+sneaker_news_ax.title.set_text('Sneakernews.com Category Chart')
 plt.show()
+# end bar chart plot
 
 
-
-# 2.B: KICKSONFIRE.com ingest and analysis -----------------------------------#
-kicks_on_fire = sneaker_site('kicksonfire.com', 'https://www.kicksonfire.com/')
-kicks_on_fire.site_calculate()
-kicks_on_fire.display_info()
-#kicks_on_fire.display_links()
-#kicks_on_fire.display_paragraphs()
-#kicks_on_fire.display_bold()
-
-# 2.C: SOLECOLLECTOR.com ingest and analysis ---------------------------------#
-sole_collector = sneaker_site('solecollector.com', 'https://solecollector.com/')
+# 2.B: SOLECOLLECTOR.com ingest and analysis ---------------------------------#
+sole_collector = sneaker_site('Solecollector.com', 'https://solecollector.com/')
 sole_collector.site_calculate()
 sole_collector.display_info()
 #sole_collector.display_links()
 #sole_collector.display_paragraphs()
 #sole_collector.display_bold()
 
-# 2.B: HYPEBEAST.com ingest and analysis -------------------------------------#
+# retrieve master sneakernews.com dataframe
+sole_collector_df = sole_collector.return_df()
+sole_collector_df.head(10)
+
+
+# 2.B.1: sneakernews.com plotting 
+
+# slice dataframe with 'category_name' and 'count' columns
+sole_collector_sliced = sole_collector_df[['category_name','count']]
+temp = sole_collector_sliced.groupby(['category_name']).sum()
+
+# sort the two column dataframe by descending on count
+temp = temp.sort_values('count', ascending = False)
+sole_collector_bar = temp.reset_index()
+sole_collector_bar.head(10)
+
+# begin bar chart plotting
+x_val = sole_collector_bar['category_name']
+y_val = sole_collector_bar['count']
+
+cr = ['red', 'grey', 'blue', 'green', 'orange']
+sole_collector_fig = plt.figure()
+sole_collector_ax = sole_collector_fig.add_subplot(111)
+sole_collector_ax.bar(x_val, y_val, align='center', color = cr)
+sole_collector_ax.title.set_text('Solecollector.com Category Chart')
+plt.show()
+# end bar chart plot
+
+
+# 2.C: HYPEBEAST.com ingest and analysis -------------------------------------#
 hypebeast = sneaker_site('hypebeast.com', 'https://hypebeast.com/')
 hypebeast.site_calculate()
 hypebeast.display_info()
