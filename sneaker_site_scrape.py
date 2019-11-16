@@ -22,6 +22,7 @@ import pprint
 from datetime import date 
 from bs4 import BeautifulSoup
 import matplotlib.pyplot as plt
+import plot_functions as pf
 # from collections import Counter
 # from string import punctuation
 
@@ -206,7 +207,7 @@ sneaker_news.display_info()
 sneaker_news_df = sneaker_news.return_df()
 sneaker_news_df.head(10)
 
-
+pf.bar_chart(sneaker_news_df,'category_name', 'count', 'Sneakernews.com')
 # 2.A.1: sneakernews.com bar chart plotting 
 
 # slice dataframe with 'category_name' and 'count' columns

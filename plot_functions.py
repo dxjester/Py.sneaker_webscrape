@@ -22,6 +22,7 @@ def bar_chart(df, x_axis, y_axis, title):
     COMMENTS: commented out color code lines
     '''
     
+    color_list = ['palegreen','lightsteelblue','wheat','turquoise','silver', 'salmon','palegreen', 'peachpuff']
     # create a new dataframe with the two provided categories
     sliced_df = df[[x_axis,y_axis]]
     summed_df = sliced_df.groupby([x_axis]).sum()
@@ -32,11 +33,15 @@ def bar_chart(df, x_axis, y_axis, title):
     x_val = master_df[x_axis]
     y_val = master_df[y_axis]
     
+    x_length = len(x_val)
+    
     # begin bar chart 
     fig = plt.figure()
     ax = fig.add_subplot(111)
     #cr = ['red', 'grey', 'blue', 'green', 'orange']
-    #ax.bar(x_val, y_val, align='center', color = cr)
-    ax.bar(x_val, y_val, align='center')
-    ax.title.set_text(title,  ' Category Chart')
+    cr = color_list[:x_length]
+    ax.bar(x_val, y_val, align='center', color = cr)
+    #ax.bar(x_val, y_val, align='center')
+    chart_title = title + ' Category Chart'
+    ax.title.set_text(chart_title)
     plt.show()
