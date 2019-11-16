@@ -244,7 +244,7 @@ sole_collector_df = sole_collector.return_df()
 sole_collector_df.head(10)
 
 
-# 2.B.1: Solecollector.com bar chart plotting 
+# 2.B.1: solecollector.com bar chart plotting 
 
 # slice dataframe with 'category_name' and 'count' columns
 sole_collector_sliced = sole_collector_df[['category_name','count']]
@@ -281,7 +281,7 @@ hypebeast_df = hypebeast.return_df()
 hypebeast_df.head(10)
 
 
-# 2.C.1: Solecollector.com bar chart plotting 
+# 2.C.1: hypebeast.com bar chart plotting 
 
 # slice dataframe with 'category_name' and 'count' columns
 hypebeast_sliced = hypebeast_df[['category_name','count']]
