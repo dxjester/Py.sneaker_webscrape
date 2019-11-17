@@ -238,6 +238,7 @@ sole_collector.display_info()
 #sole_collector.display_links()
 #sole_collector.display_paragraphs()
 #sole_collector.display_bold()
+#sole_collector.display_soup()
 
 # retrieve master sneakernews.com dataframe
 sole_collector_df = sole_collector.return_df()
@@ -255,9 +256,11 @@ pf.pie_chart(sole_collector_df,'category_name', 'count', 'Solecollector.com')
 hypebeast = sneaker_site('hypebeast.com', 'https://hypebeast.com/')
 hypebeast.site_calculate()
 hypebeast.display_info()
+
 #hypebeast.display_links()
 #hypebeast.display_paragraphs()
 #hypebeast.display_bold()
+#hypebeast.display_soup()
 
 # retrieve master sneakernews.com dataframe
 hypebeast_df = hypebeast.return_df()
