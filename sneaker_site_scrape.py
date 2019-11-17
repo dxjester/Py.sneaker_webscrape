@@ -279,7 +279,7 @@ pf.pie_chart(master_df,'category_name', 'count', 'Consolidated Pie Report')
 #----------------------------------- START -----------------------------------#
 #----------------------- PHASE 4: Dataframe Export ---------------------------#
 #-----------------------------------------------------------------------------#
-path = "/dataframe_exports/"
+path = '/Users/patrickbenitez/Desktop/Georgia Tech/Codebook/Git Projects/Py.sneakernews.webscrape/df_exports/'
 
 # Converting date into DD-MM-YYYY format
 temp_date = datetime.datetime.today()
