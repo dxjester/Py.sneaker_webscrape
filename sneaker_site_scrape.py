@@ -192,7 +192,7 @@ class sneaker_site:
         
         
 #----------------------------------- START -----------------------------------#
-#-------------------------- PHASE 2: Execution area --------------------------#
+#------------------------- PHASE 2: Website Scrape  --------------------------#
 #-----------------------------------------------------------------------------#
 
 # 2.A: SNEAKERNEWS.com ingest and analysis -----------------------------------#
@@ -213,6 +213,9 @@ pf.pie_chart(sneaker_news_df,'category_name', 'count', 'Sneakernews.com')
 
 
 
+
+
+
 # 2.B: SOLECOLLECTOR.com ingest and analysis ---------------------------------#
 sole_collector = sneaker_site('Solecollector.com', 'https://solecollector.com/')
 sole_collector.site_calculate()
@@ -230,6 +233,9 @@ pf.bar_chart(sole_collector_df,'category_name', 'count', 'Solecollector.com')
 pf.pie_chart(sole_collector_df,'category_name', 'count', 'Solecollector.com')
 
 
+
+
+
 # 2.C: HYPEBEAST.com ingest and analysis -------------------------------------#
 hypebeast = sneaker_site('hypebeast.com', 'https://hypebeast.com/')
 hypebeast.site_calculate()
@@ -245,4 +251,11 @@ hypebeast_df.head(10)
 # website plotting
 pf.bar_chart(hypebeast_df,'category_name', 'count', 'Hypebeast.com')
 pf.pie_chart(hypebeast_df,'category_name', 'count', 'Hypebeast.com')
+
+
+
+
+#----------------------------------- START -----------------------------------#
+#----------------------- PHASE 3: Data Consolidation -------------------------#
+#-----------------------------------------------------------------------------#
 
