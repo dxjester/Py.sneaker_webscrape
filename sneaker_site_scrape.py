@@ -290,4 +290,8 @@ file_date
 full_path = path + file_date + ".csv"
 full_path
 
-master_df.to_csv(path)
+master_df.to_csv(full_path)
+
+
+
+# "If you and Chuck Norris both have 5 dollars, he still has more money that you"
