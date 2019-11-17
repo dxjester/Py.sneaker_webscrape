@@ -258,6 +258,8 @@ pf.pie_chart(hypebeast_df,'category_name', 'count', 'Hypebeast.com')
 print("\n End of Phase 2 ...\n")
 
 
+
+
 #----------------------------------- START -----------------------------------#
 #----------------------- PHASE 3: Data Consolidation -------------------------#
 #-----------------------------------------------------------------------------#
@@ -279,19 +281,25 @@ pf.pie_chart(master_df,'category_name', 'count', 'Consolidated Pie Report')
 #----------------------------------- START -----------------------------------#
 #----------------------- PHASE 4: Dataframe Export ---------------------------#
 #-----------------------------------------------------------------------------#
+
+print("\n Starting Phase 4 ...\n")
+
 path = '/Users/patrickbenitez/Desktop/Georgia Tech/Codebook/Git Projects/Py.sneakernews.webscrape/df_exports/'
 
 # Converting date into DD-MM-YYYY format
 temp_date = datetime.datetime.today()
 file_date = str(temp_date.strftime('%Y-%m-%d')) 
-file_date
 
 # create the full file path
 full_path = path + file_date + ".csv"
-full_path
 
+# export the file to the /df_exports/ directory
 master_df.to_csv(full_path)
 
 
 
-# "If you and Chuck Norris both have 5 dollars, he still has more money that you"
+#----------------------------------- START -----------------------------------#
+#--------------------------- PHASE 5: Glob Import ----------------------------#
+#-----------------------------------------------------------------------------#
+
+# "If you and Chuck Norris both have 5 dollars, he still has more money that you."
