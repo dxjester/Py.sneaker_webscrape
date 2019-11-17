@@ -9,7 +9,7 @@ VERSION: 1.0
 
 
 #----------------------------------- START -----------------------------------#
-#-------------------------- PHASE 1: Import Libraries ------------------------#
+#-------------------------- PHASE 1: Program Setup ---------------------------#
 #-----------------------------------------------------------------------------#
 
 # 1.1 Module Import ----------------------------------------------------------#
@@ -189,11 +189,14 @@ class sneaker_site:
         '''
         pp = pprint.PrettyPrinter(indent=4)
         pp.pprint(self.bold_list)  
-        
+    
+print("\n End of Phase 1 ...\n")
         
 #----------------------------------- START -----------------------------------#
 #------------------------- PHASE 2: Website Scrape  --------------------------#
 #-----------------------------------------------------------------------------#
+
+print("\n Starting Phase 2 ...\n")
 
 # 2.A: SNEAKERNEWS.com ingest and analysis -----------------------------------#
 sneaker_news = sneaker_site('sneakernews.com', 'https://sneakernews.com/')
@@ -252,10 +255,19 @@ hypebeast_df.head(10)
 pf.bar_chart(hypebeast_df,'category_name', 'count', 'Hypebeast.com')
 pf.pie_chart(hypebeast_df,'category_name', 'count', 'Hypebeast.com')
 
-
+print("\n End of Phase 2 ...\n")
 
 
 #----------------------------------- START -----------------------------------#
 #----------------------- PHASE 3: Data Consolidation -------------------------#
 #-----------------------------------------------------------------------------#
 
+print("\n Starting Phase 3 ...\n")
+
+# concat the three dataframes into a single, unified dataframe
+frames = [sneaker_news_df, sole_collector_df, hypebeast_df]
+master_df = pd.concat(frames)
+master_df.head(10)
+
+pf.bar_chart(master_df,'category_name', 'count', 'Consolidated Bar Chart Report')
+pf.pie_chart(master_df,'category_name', 'count', 'Consolidated Pie Report')
