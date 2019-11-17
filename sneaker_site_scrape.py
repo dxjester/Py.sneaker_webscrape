@@ -267,7 +267,27 @@ print("\n Starting Phase 3 ...\n")
 # concat the three dataframes into a single, unified dataframe
 frames = [sneaker_news_df, sole_collector_df, hypebeast_df]
 master_df = pd.concat(frames)
+master_df['short_date'] = master_df['dtg'].dt.date
 master_df.head(10)
 
 pf.bar_chart(master_df,'category_name', 'count', 'Consolidated Bar Chart Report')
 pf.pie_chart(master_df,'category_name', 'count', 'Consolidated Pie Report')
+
+
+
+
+#----------------------------------- START -----------------------------------#
+#----------------------- PHASE 4: Dataframe Export ---------------------------#
+#-----------------------------------------------------------------------------#
+path = "/dataframe_exports/"
+
+# Converting date into DD-MM-YYYY format
+temp_date = datetime.datetime.today()
+file_date = str(temp_date.strftime('%Y-%m-%d')) 
+file_date
+
+# create the full file path
+full_path = path + file_date + ".csv"
+full_path
+
+master_df.to_csv(path)
