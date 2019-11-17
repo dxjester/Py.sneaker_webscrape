@@ -168,7 +168,14 @@ class sneaker_site:
         DESCRIPTION: return class dataframe 
         '''
         return self.site_df
-        
+
+    def display_soup(self):
+        '''
+        DESCRIPTION: display hyperlinks for the object
+        '''
+        pp = pprint.PrettyPrinter(indent=4)
+        pp.pprint(self.soup)
+    
     def display_links(self):
         '''
         DESCRIPTION: display hyperlinks for the object
@@ -189,9 +196,11 @@ class sneaker_site:
         '''
         pp = pprint.PrettyPrinter(indent=4)
         pp.pprint(self.bold_list)  
-    
-print("\n End of Phase 1 ...\n")
         
+
+
+
+
 #----------------------------------- START -----------------------------------#
 #------------------------- PHASE 2: Website Scrape  --------------------------#
 #-----------------------------------------------------------------------------#
@@ -202,9 +211,11 @@ print("\n Starting Phase 2 ...\n")
 sneaker_news = sneaker_site('sneakernews.com', 'https://sneakernews.com/')
 sneaker_news.site_calculate()
 sneaker_news.display_info()
+
 #sneaker_news.display_links()
 #sneaker_news.display_paragraphs()
 #sneaker_news.display_bold()
+#sneaker_news.display_soup()
 
 # retrieve master sneakernews.com dataframe
 sneaker_news_df = sneaker_news.return_df()
@@ -223,6 +234,7 @@ pf.pie_chart(sneaker_news_df,'category_name', 'count', 'Sneakernews.com')
 sole_collector = sneaker_site('Solecollector.com', 'https://solecollector.com/')
 sole_collector.site_calculate()
 sole_collector.display_info()
+
 #sole_collector.display_links()
 #sole_collector.display_paragraphs()
 #sole_collector.display_bold()
