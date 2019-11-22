@@ -311,7 +311,7 @@ full_path = path + file_date + ".csv"
 # export the file to the /df_exports/ directory
 master_df.to_csv(full_path)
 
-print("File successfully exported ...")
+print("File successfully exported!")
 
 #----------------------------------- START -----------------------------------#
 #--------------------------- PHASE 5: Glob Import ----------------------------#
