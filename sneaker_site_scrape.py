@@ -306,7 +306,7 @@ temp_date = datetime.datetime.today()
 file_date = str(temp_date.strftime('%Y-%m-%d')) 
 
 # create the full file path
-full_path = path + file_date + ".csv"
+full_path = path + "v1_" +  file_date + ".csv"
 
 # export the file to the /df_exports/ directory
 master_df.to_csv(full_path)
