@@ -308,15 +308,29 @@ print("File successfully exported!")
 
 
 #----------------------------------- START -----------------------------------#
-#--------------------------- PHASE 4: Glob Import ----------------------------#
+#---------------------- PHASE 4: CSV Import & Analysis -----------------------#
 #-----------------------------------------------------------------------------#
 
-import glob 
+# 4.1: Determine all version 1.0 files located in the 'df_exports' directory
+import glob # to read in multiple csv files
 
-print("\nListing existing export files: \n")
 
-for name in glob.glob('df_exports/v1_*.csv'): # only retrieve "v1_" csv files
-    print(name)
+print("\nRetrieving version 1.0 csv files ...")
+
+csv_list = [] # store values in the list
+for csv_file in glob.glob('df_exports/v1_*.csv'): # only retrieve "v1_" csv files
+    csv_list.append(csv_file)
+    print ("\n", csv_file)
+
+print("\nTotal amount of files: {}".format(len(csv_list)))
+
+
+# 4.2: Read in each csv file into the master dataframe
+master_df = pd.DataFrame(columns=['file_date', 'category', 'item', 'count'])
+
+
+
+
 
 
 
