@@ -228,8 +228,6 @@ pf.pie_chart(sneaker_news_df,'category_name', 'count', 'Sneakernews.com')
 
 
 
-
-
 # 2.B: SOLECOLLECTOR.com ingest and analysis ---------------------------------#
 sole_collector = sneaker_site('Solecollector.com', 'https://solecollector.com/')
 sole_collector.site_calculate()
@@ -247,8 +245,6 @@ sole_collector_df.head(10)
 # website plotting
 pf.bar_chart(sole_collector_df,'category_name', 'count', 'Solecollector.com')
 pf.pie_chart(sole_collector_df,'category_name', 'count', 'Solecollector.com')
-
-
 
 
 
@@ -306,7 +302,6 @@ print("File successfully exported!")
 
 
 
-
 #----------------------------------- START -----------------------------------#
 #---------------------- PHASE 4: CSV Import & Analysis -----------------------#
 #-----------------------------------------------------------------------------#
@@ -328,8 +323,9 @@ print("\nTotal amount of files: {}".format(len(csv_list)))
 # 4.2: Read in each csv file into the master dataframe
 master_df = pd.DataFrame(columns=['file_date', 'category', 'item', 'count'])
 
-
-
+# extract the four columns from each csv file and append to 'master_df'
+for csv_file in csv_list:
+    
 
 
 
