@@ -53,15 +53,15 @@ class sneaker_site:
         self.puma_site_count = 0
         self.vans_site_count = 0
 
-        # default Nike list
+        # default Nike list with different Nike shoe companies
         self.nike_master = ['Nike', 'Jordan', 'Converse'] 
         # ['Nike', 'Air', 'Max', 'Jordan', 'Zoom', 'React', 'Shox', 'ACG', 'Max Plus', 'Joyride', 'Tinker', 'Force', 'Westbrook', 'Kyrie','Lebron', 'Durant', 'SB', 'Air Max 90', 'Air Max 97', 'Air Max 1', 'Kyrie', 'Air Max 270', 'Travis Scott' ]
 
-        # default Adidas list     
+        # default Adidas list with different Adidas shoe companies
         self.adidas_master = ['Adidas', 'Reebok', 'ADIDAS', 'Yeezy', 'Kanye', 'adidas', 'kanye', 'yeezy']
         # ['Adidas', 'ADIDAS', 'adidas', 'Yeezy', 'Kanye', 'Ultraboost', 'EQT', 'NMD', 'Ultra Boost', 'FYW', 'Harden']
         
-        # default New Balance list
+        # default New Balance list 
         self.new_balance_master = ['New Balance', 'NB', 'new balance']
         # ['New Balance', 'NB', 'Balance', '997', '801']
         
@@ -274,9 +274,8 @@ print("\n End of Phase 2 ...\n")
 
 
 
-
 #----------------------------------- START -----------------------------------#
-#----------------------- PHASE 3: Data Consolidation -------------------------#
+#------------------- PHASE 3: Data Consolidation & Export --------------------#
 #-----------------------------------------------------------------------------#
 
 print("\n Starting Phase 3 ...\n")
@@ -289,15 +288,6 @@ master_df.head(10)
 
 pf.bar_chart(master_df,'category_name', 'count', 'Consolidated Bar Chart Report')
 pf.pie_chart(master_df,'category_name', 'count', 'Consolidated Pie Report')
-
-
-
-
-#----------------------------------- START -----------------------------------#
-#----------------------- PHASE 4: Dataframe Export ---------------------------#
-#-----------------------------------------------------------------------------#
-
-print("\n Starting Phase 4 ...\n")
 
 path = '/Users/patrickbenitez/Desktop/Georgia Tech/Codebook/Py.sneaker_webscrape/df_exports/'
 
@@ -318,12 +308,15 @@ print("File successfully exported!")
 
 
 #----------------------------------- START -----------------------------------#
-#--------------------------- PHASE 5: Glob Import ----------------------------#
+#--------------------------- PHASE 4: Glob Import ----------------------------#
 #-----------------------------------------------------------------------------#
 
+import glob 
 
+print("\nListing existing export files: \n")
 
-
+for name in glob.glob('df_exports/v1_*.csv'): # only retrieve "v1_" csv files
+    print(name)
 
 
 
