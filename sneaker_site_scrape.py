@@ -3,7 +3,7 @@
 FILENAME: sneakernews_scrape.py
 PROJECT: Sneaker Website Analysis
 DATE CREATED: 15-Aug-19
-DATE UPDATED: 9-NOV-19
+DATE UPDATED: 22-NOV-19
 VERSION: 1.0
 """
 
@@ -299,7 +299,7 @@ pf.pie_chart(master_df,'category_name', 'count', 'Consolidated Pie Report')
 
 print("\n Starting Phase 4 ...\n")
 
-path = '/Users/patrickbenitez/Desktop/Georgia Tech/Codebook/Git Projects/Py.sneakernews.webscrape/df_exports/'
+path = '/Users/patrickbenitez/Desktop/Georgia Tech/Codebook/Py.sneaker_webscrape/df_exports/'
 
 # Converting date into DD-MM-YYYY format
 temp_date = datetime.datetime.today()
