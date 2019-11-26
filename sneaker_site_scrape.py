@@ -289,15 +289,17 @@ path = '/Users/patrickbenitez/Desktop/Georgia Tech/Codebook/Py.sneaker_webscrape
 
 # Converting date into DD-MM-YYYY format
 temp_date = datetime.datetime.today()
-file_datetime = str(temp_date.strftime('%Y-%m-%d')) 
+
+file_date = temp_date.strftime('%Y-%m-%d')
+
 
 # create the full file path
-full_path = path + "v1_" +  file_datetime + ".csv"
+full_path = path + "v1_" +  file_date + ".csv"
 
 # export the file to the /df_exports/ directory
 master_df.to_csv(full_path)
 
-print("File successfully exported!")
+print("\nFile successfully exported!")
 
 
 
