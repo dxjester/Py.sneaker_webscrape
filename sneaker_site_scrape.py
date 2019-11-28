@@ -338,6 +338,7 @@ for csv_file in csv_list:
     
 master_df['count'] = master_df['count'].astype(int)
 master_df.dtypes
+master_df.head(25)
 
 print("\n Displaying Total History of Company Mentions")
 
@@ -350,4 +351,6 @@ pf.pie_chart(master_df,'category_name', 'count', 'Historical Pie Report')
 # time series line chart categorized by shoe company
 pf.multiple_line_series(master_df, 'Historical Timeseries')
 print("\n End of Program!")
+
+
 # "If you and Chuck Norris both have 5 dollars, he still has more money that you."
