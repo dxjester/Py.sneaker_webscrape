@@ -278,12 +278,12 @@ print("\n Starting Phase 3 ...\n")
 
 # concat the three dataframes into a single, unified dataframe
 frames = [sneaker_news_df, sole_collector_df, hypebeast_df]
-master_df = pd.concat(frames)
-master_df['short_date'] = master_df['dtg'].dt.date
-master_df.head(10)
+day_master = pd.concat(frames)
+day_master['short_date'] = day_master['dtg'].dt.date
+day_master.head(10)
 
-pf.bar_chart(master_df,'category_name', 'count', 'Consolidated Bar Chart Report')
-pf.pie_chart(master_df,'category_name', 'count', 'Consolidated Pie Report')
+pf.bar_chart(day_master,'category_name', 'count', 'Consolidated Bar Chart Report')
+pf.pie_chart(day_master,'category_name', 'count', 'Consolidated Pie Report')
 
 path = '/Users/patrickbenitez/Desktop/Georgia Tech/Codebook/Py.sneaker_webscrape/df_exports/'
 
@@ -297,7 +297,7 @@ file_date = temp_date.strftime('%Y-%m-%d')
 full_path = path + "v1_" +  file_date + ".csv"
 
 # export the file to the /df_exports/ directory
-master_df.to_csv(full_path)
+day_master.to_csv(full_path)
 
 print("\nFile successfully exported!")
 
@@ -333,6 +333,14 @@ for csv_file in csv_list:
     
 master_df
 
+print("\n Displaying Total History of Company Mentions")
+
+# sorted bar chart
+pf.bar_chart(master_df,'category_name', 'count', 'Historical Bar Chart Report')
+
+# percentage pie chart
+pf.pie_chart(master_df,'category_name', 'count', 'Historical Pie Report')
+print("\n End of Program")
 
 
 
