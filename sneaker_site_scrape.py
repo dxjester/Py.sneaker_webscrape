@@ -3,7 +3,7 @@
 FILENAME: sneakernews_scrape.py
 PROJECT: Sneaker Website Analysis
 DATE CREATED: 15-Aug-19
-DATE UPDATED: 22-NOV-19
+DATE UPDATED: 27-NOV-19
 VERSION: 1.0
 """
 
@@ -28,7 +28,12 @@ import plot_functions as pf
 
 # 1.1 Class Declaration ------------------------------------------------------#
 class sneaker_site:
-    
+    '''
+    DESCRIPTION: Purpose of this class is to store website data located from various
+        sneaker websites and retrieve pertinent key words from each object's scrape.
+        The data scraped is then transformed into a tibble, which is then exported as 
+        it's on individual CSV, later utilized for follow-on analytics
+    '''
     # initialize the class
     def __init__ (self, name, url): # provide the name of the website and the url
         '''
@@ -331,7 +336,8 @@ for csv_file in csv_list:
     sliced_df = temp_df[['date', 'category_name', 'item', 'count']]
     master_df = pd.concat([master_df, sliced_df])
     
-master_df
+master_df['count'] = master_df['count'].astype(int)
+master_df.dtypes
 
 print("\n Displaying Total History of Company Mentions")
 
@@ -340,8 +346,8 @@ pf.bar_chart(master_df,'category_name', 'count', 'Historical Bar Chart Report')
 
 # percentage pie chart
 pf.pie_chart(master_df,'category_name', 'count', 'Historical Pie Report')
-print("\n End of Program")
 
-
-
+# time series line chart categorized by shoe company
+pf.multiple_line_series(master_df, 'Historical Timeseries')
+print("\n End of Program!")
 # "If you and Chuck Norris both have 5 dollars, he still has more money that you."

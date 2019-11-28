@@ -69,3 +69,13 @@ def pie_chart(df, x_axis, y_axis, title):
     
     plt.axis('equal')
     plt.show()
+    
+def multiple_line_series(df, title):
+    #color_list = ['palegreen','lightsteelblue','wheat','turquoise','silver', 'salmon','palegreen', 'peachpuff']
+    
+    temp_df = df[['date','category_name','count']]
+    group_df = temp_df.groupby(['date','category_name']).sum().reset_index()
+    plot_df = pd.pivot_table(group_df,values='count',index='date',columns='category_name')
+    #plot_df = temp_df.pivot(index='date', columns='category_name', values='count')
+    #return df
+    plot_df.plot()
