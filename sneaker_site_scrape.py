@@ -323,11 +323,15 @@ print("\nTotal amount of files: {}".format(len(csv_list)))
 
 
 # 4.2: Read in each csv file into the master dataframe
-master_df = pd.DataFrame(columns=['file_date', 'category', 'item', 'count'])
+master_df = pd.DataFrame(columns=['date', 'category_name', 'item', 'count'])
 
 # extract the four columns from each csv file and append to 'master_df'
 for csv_file in csv_list:
+    temp_df = pd.read_csv(csv_file)
+    sliced_df = temp_df[['date', 'category_name', 'item', 'count']]
+    master_df = pd.concat([master_df, sliced_df])
     
+master_df
 
 
 
