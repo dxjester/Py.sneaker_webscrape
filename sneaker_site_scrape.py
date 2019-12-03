@@ -340,14 +340,15 @@ master_df['count'] = master_df['count'].astype(int)
 master_df.dtypes
 master_df.head(25)
 
-print("\n Displaying Total History of Company Mentions")
-
+print("\n Displaying total history of shoe company mentions ...")
 # sorted bar chart
 pf.bar_chart(master_df,'category_name', 'count', 'Historical Bar Chart Report')
 
+print("\n Displaying percentage breakdown by shoe companies...")
 # percentage pie chart
 pf.pie_chart(master_df,'category_name', 'count', 'Historical Pie Report')
 
+print("\n Displaying timeseries summary by shoe company ...")
 # time series line chart categorized by shoe company
 pf.multiple_line_series(master_df, 'Historical Timeseries')
 print("\n End of Program!")
