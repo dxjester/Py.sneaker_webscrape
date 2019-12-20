@@ -35,23 +35,29 @@ class sneaker_site:
         The data scraped is then transformed into a tibble, which is then exported as 
         it's on individual CSV, later utilized for follow-on analytics
     '''
+    
     # initialize the class
     def __init__ (self, name, url): # provide the name of the website and the url
         '''
         DESCRIPTION: initialize class with default class arguments
         '''
-        self.website_name = name
-        self.url = url
-        self.site_text = ''
+        self.website_name = name # set the name
+        self.url = url # save the url
+        self.site_text = '' # value to save the site text for each object
+        self.converted_site_text = '' # converting the extracted value to lower case, via the 'text_functions' file
         self.lines = ''
+        
+        # create a dataframe to store extracted values for each object
         self.site_df = pd.DataFrame(columns = ['website','dtg', 'date','year', 'month', 'day', 'category_name', 'item', 'count'])
         self.site_df['website'] = self.website_name # assign the website name to the entire class dataframe
         
-        self.soup = ''
-        self.hyperlink_list = ''
-        self.paragraph_list = ''
-        self.bold_list = ''
+        # creating Beautiful Soup variables to store individual values
+        self.soup = '' # variable to store the complete values 
+        self.hyperlink_list = '' # variable to store the hyperlinks tags
+        self.paragraph_list = '' # variable to store paragraph value tags
+        self.bold_list = '' # variable to store bold value tags
         
+        # create the site variables to aggregate total counts for each object
         self.nike_site_count = 0
         self.adidas_site_count = 0
         self.reebok_site_count = 0
@@ -60,11 +66,11 @@ class sneaker_site:
         self.vans_site_count = 0
 
         # default Nike list with different Nike shoe companies
-        self.nike_master = ['Nike', 'Jordan', 'Converse'] 
+        self.nike_master = ['nike', 'jordan', 'converse'] 
         # ['Nike', 'Air', 'Max', 'Jordan', 'Zoom', 'React', 'Shox', 'ACG', 'Max Plus', 'Joyride', 'Tinker', 'Force', 'Westbrook', 'Kyrie','Lebron', 'Durant', 'SB', 'Air Max 90', 'Air Max 97', 'Air Max 1', 'Kyrie', 'Air Max 270', 'Travis Scott' ]
 
         # default Adidas list with different Adidas shoe companies
-        self.adidas_master = ['Adidas', 'Reebok', 'ADIDAS', 'Yeezy', 'Kanye', 'adidas', 'kanye', 'yeezy']
+        self.adidas_master = ['adidas', 'reebok', 'ADIDAS', 'Yeezy', 'Kanye', 'adidas', 'kanye', 'yeezy']
         # ['Adidas', 'ADIDAS', 'adidas', 'Yeezy', 'Kanye', 'Ultraboost', 'EQT', 'NMD', 'Ultra Boost', 'FYW', 'Harden']
         
         # default New Balance list 
@@ -100,6 +106,7 @@ class sneaker_site:
         self.bold_list = self.soup.findAll('b')
         
         self.site_text = self.soup.get_text()
+        self.converted_site_text = tf.normalize_string(self.site_text)
         print("\nConverting ", self.website_name, " to text file ... ")
         
         self.lines = [self.site_text.lower() for line in self.site_text]
@@ -112,7 +119,7 @@ class sneaker_site:
         for item in self.sneaker_list:
             website = self.website_name
             name = item + ': '
-            count = self.site_text.count(item)
+            count = self.converted_site_text.count(item)
             today = date.today()
             dtg = datetime.datetime.now()
             year = dtg.year
@@ -301,7 +308,7 @@ file_date = temp_date.strftime('%Y-%m-%d')
 
 
 # create the full file path
-full_path = path + "v1_" +  file_date + ".csv"
+full_path = path + "v2_" +  file_date + ".csv"
 
 # export the file to the /df_exports/ directory
 day_master.to_csv(full_path)
@@ -319,7 +326,7 @@ print("\nFile successfully exported!")
 import glob # to read in multiple csv files
 
 
-print("\nRetrieving version 1.0 csv files ...")
+print("\nRetrieving version 2.0 csv files ...")
 
 csv_list = [] # store values in the list
 for csv_file in glob.glob('df_exports/v1_*.csv'): # only retrieve "v1_" csv files
@@ -362,3 +369,5 @@ print("\n End of Program!")
 # TESTING AREA ---------------------------------------------------------------#
 
 test_text = 'This is a test STRING Value for #$%&#@$ text_functions.py file.'
+normalize_test_text = tf.normalize_string(test_text)
+print(normalize_test_text)
