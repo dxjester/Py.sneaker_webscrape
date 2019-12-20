@@ -23,6 +23,7 @@ from datetime import date
 from bs4 import BeautifulSoup
 import matplotlib.pyplot as plt
 import plot_functions as pf
+import text_functions as tf
 # from collections import Counter
 # from string import punctuation
 
@@ -82,13 +83,13 @@ class sneaker_site:
         self.length = len(self.sneaker_list)         
         print("{} website object created".format(self.website_name))
     
-    # class function to calculate the counts of list 
+    # class function to calculate the counts of each sneaker value in the master 'sneaker_list' data structure
     def site_calculate(self):
         '''
         DESCRIPTION: pull the raw data from the website and append in dataframe
         '''
         
-        start_time = time.time()
+        start_time = time.time() # to calculate the time needed to process the function from start to finish
         print("\nRetrieving {} text and data ...".format(self.website_name))
         r = requests.get(self.url)
         self.soup = BeautifulSoup(r.content, "html.parser")
@@ -106,6 +107,8 @@ class sneaker_site:
         
         index_num = 0
 
+        # utilize the for loop to iterate over each object and count the .... 
+        # ... amount of times a value is depicted in each extraction
         for item in self.sneaker_list:
             website = self.website_name
             name = item + ': '
@@ -354,3 +357,8 @@ print("\n End of Program!")
 
 
 # "If you and Chuck Norris both have 5 dollars, he still has more money that you."
+# --------------------------- END OF PROGRAM ---------------------------------#
+
+# TESTING AREA ---------------------------------------------------------------#
+
+test_text = 'This is a test STRING Value for #$%&#@$ text_functions.py file.'
