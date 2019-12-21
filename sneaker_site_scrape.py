@@ -92,14 +92,18 @@ class sneaker_site:
     # class function to calculate the counts of each sneaker value in the master 'sneaker_list' data structure
     def site_calculate(self):
         '''
-        DESCRIPTION: pull the raw data from the website and append in dataframe
+        DESCRIPTION: extract each website's raw data and append in the object's dataframe
         '''
         
-        start_time = time.time() # to calculate the time needed to process the function from start to finish
+        # to calculate the time needed to process the function from start to finish
+        start_time = time.time() 
         print("\nRetrieving {} text and data ...".format(self.website_name))
+        
+        # establish connection to the website
         r = requests.get(self.url)
         self.soup = BeautifulSoup(r.content, "html.parser")
         
+        # find and categorize all hyperlink (a), paragraph (p), and bold (b) html tags
         print("\nConsolidating all hyperlinks and paragraphs for", self.website_name)        
         self.hyperlink_list = self.soup.findAll('a')
         self.paragraph_list = self.soup.findAll('p')
