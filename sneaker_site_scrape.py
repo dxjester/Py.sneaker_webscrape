@@ -109,6 +109,7 @@ class sneaker_site:
         self.paragraph_list = self.soup.findAll('p')
         self.bold_list = self.soup.findAll('b')
         
+        # convert individual Soup categories to text
         self.site_text = self.soup.get_text()
         self.converted_site_text = tf.normalize_string(self.site_text)
         print("\nConverting ", self.website_name, " to text file ... ")
@@ -121,9 +122,11 @@ class sneaker_site:
         # utilize the for loop to iterate over each object and count the .... 
         # ... amount of times a value is depicted in each extraction
         for item in self.sneaker_list:
+            
+            # allocate object variables as values for the class dataframe
             website = self.website_name
             name = item + ': '
-            count = self.converted_site_text.count(item)
+            count = self.converted_site_text.count(item) # count text items
             today = date.today()
             dtg = datetime.datetime.now()
             year = dtg.year
@@ -132,6 +135,7 @@ class sneaker_site:
 
             category = ''
             
+            # if count > 0 , aggregate the count based on shoe company name
             if count > 0:
                 if item in self.nike_master:
                     self.nike_site_count += count
@@ -162,7 +166,9 @@ class sneaker_site:
                 elif item in self.vans_master:
                     category = 'Vans'
                 else: 
-                    0                
+                    0      
+                    
+            # append each new row to the class dataframe
             self.site_df.loc[index_num] = [website, dtg, today, year, month, day_num, category, item, count]        
             print(name, count)
             index_num += 1
