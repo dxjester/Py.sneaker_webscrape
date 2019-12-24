@@ -69,10 +69,22 @@ def pie_chart(df, x_axis, y_axis, title):
     
     plt.axis('equal')
     plt.show()
+
+def timeseries_line_chart(df, shoe_company, title):
+    '''
+    NAME: timeseries_line_chart function
+    PURPOSE: given a dataframe, a filtered column value, and a title, plot a timeseries chart
+    COMMENTS: only allows one (1) x categorical variable and one (1) x quantifiable variable
+    '''
+    cond1 = df['category_name'] == shoe_company
+    temp_df = df[cond1]
+    filtered_df = temp_df[['date','count']]
+    group_df = filtered_df.groupby(['date']).sum().reset_index()
+    plot_df = pd.pivot_table(group_df,values='count',index='date')
+    plot_df.plot()
     
 def multiple_line_series(df, title):
     #color_list = ['palegreen','lightsteelblue','wheat','turquoise','silver', 'salmon','palegreen', 'peachpuff']
-    
     temp_df = df[['date','category_name','count']]
     group_df = temp_df.groupby(['date','category_name']).sum().reset_index()
     plot_df = pd.pivot_table(group_df,values='count',index='date',columns='category_name')

@@ -346,6 +346,7 @@ for csv_file in glob.glob('df_exports/v1_*.csv'): # only retrieve "v1_" csv file
 print("\nTotal amount of files: {}".format(len(csv_list)))
 
 
+
 # 4.2: Read in each csv file into the master dataframe
 master_df = pd.DataFrame(columns=['date', 'category_name', 'item', 'count'])
 
@@ -356,9 +357,13 @@ for csv_file in csv_list:
     master_df = pd.concat([master_df, sliced_df])
     
 master_df['count'] = master_df['count'].astype(int)
+master_df['date'] = master_df['date'].astype('datetime64[ns]')
 master_df.dtypes
 master_df.head(25)
 
+
+
+# 4.3: Invoke plotting functions to depict visualizations
 print("\n Displaying total history of shoe company mentions ...")
 # sorted bar chart
 pf.bar_chart(master_df,'category_name', 'count', 'Historical Bar Chart Report')
@@ -370,6 +375,17 @@ pf.pie_chart(master_df,'category_name', 'count', 'Historical Pie Report')
 print("\n Displaying timeseries summary by shoe company ...")
 # time series line chart categorized by shoe company
 pf.multiple_line_series(master_df, 'Historical Timeseries')
+
+
+# plot individual linear regression analysis for each shoe company
+pf.timeseries_line_chart(master_df, 'Nike', 'Nike Timeseries')
+pf.timeseries_line_chart(master_df, 'Adidas', 'Adidas Timeseries')
+pf.timeseries_line_chart(master_df, 'New Balance', 'New Balance Timeseries')
+pf.timeseries_line_chart(master_df, 'Puma', 'Puma Timeseries')
+pf.timeseries_line_chart(master_df, 'Vans', 'Nike Timeseries')
+
+
+
 print("\n End of Program!")
 
 
