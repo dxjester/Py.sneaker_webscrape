@@ -9,6 +9,7 @@ DATE UPDATED: 15-Nov-19
 import requests
 import time
 import pandas as pd
+import seaborn as sns
 import datetime
 import pprint
 from datetime import date 
@@ -69,6 +70,11 @@ def pie_chart(df, x_axis, y_axis, title):
     
     plt.axis('equal')
     plt.show()
+
+
+def linear_reg_sns(df)
+    X = (df.index -  df.index[0]).days.reshape(-1, 1)
+    ax = sns.regplot(x="total_bill", y="tip", data=tips)
 
 def timeseries_line_chart(df, shoe_company, title):
     '''

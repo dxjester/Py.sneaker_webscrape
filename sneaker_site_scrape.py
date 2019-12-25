@@ -364,6 +364,14 @@ master_df.head(25)
 
 
 # 4.3: Invoke plotting functions to depict visualizations
+
+# plot individual linear regression analysis for each shoe company
+pf.timeseries_line_chart(master_df, 'Nike', 'Nike Timeseries')
+pf.timeseries_line_chart(master_df, 'Adidas', 'Adidas Timeseries')
+pf.timeseries_line_chart(master_df, 'New Balance', 'New Balance Timeseries')
+pf.timeseries_line_chart(master_df, 'Puma', 'Puma Timeseries')
+pf.timeseries_line_chart(master_df, 'Vans', 'Nike Timeseries')
+
 print("\n Displaying total history of shoe company mentions ...")
 # sorted bar chart
 pf.bar_chart(master_df,'category_name', 'count', 'Historical Bar Chart Report')
@@ -377,12 +385,7 @@ print("\n Displaying timeseries summary by shoe company ...")
 pf.multiple_line_series(master_df, 'Historical Timeseries')
 
 
-# plot individual linear regression analysis for each shoe company
-pf.timeseries_line_chart(master_df, 'Nike', 'Nike Timeseries')
-pf.timeseries_line_chart(master_df, 'Adidas', 'Adidas Timeseries')
-pf.timeseries_line_chart(master_df, 'New Balance', 'New Balance Timeseries')
-pf.timeseries_line_chart(master_df, 'Puma', 'Puma Timeseries')
-pf.timeseries_line_chart(master_df, 'Vans', 'Nike Timeseries')
+
 
 
 
