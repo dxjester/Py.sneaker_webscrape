@@ -232,7 +232,7 @@ class sneaker_site:
 
 print("\n Starting Phase 2 ...\n")
 
-# 2.A: SNEAKERNEWS.com ingest and analysis -----------------------------------#
+# 2.1: SNEAKERNEWS.com ingest and analysis -----------------------------------#
 sneaker_news = sneaker_site('sneakernews.com', 'https://sneakernews.com/')
 sneaker_news.site_calculate()
 sneaker_news.display_info()
@@ -253,7 +253,7 @@ pf.pie_chart(sneaker_news_df,'category_name', 'count', 'Sneakernews.com')
 
 
 
-# 2.B: SOLECOLLECTOR.com ingest and analysis ---------------------------------#
+# 2.2: SOLECOLLECTOR.com ingest and analysis ---------------------------------#
 sole_collector = sneaker_site('Solecollector.com', 'https://solecollector.com/')
 sole_collector.site_calculate()
 sole_collector.display_info()
@@ -273,7 +273,7 @@ pf.pie_chart(sole_collector_df,'category_name', 'count', 'Solecollector.com')
 
 
 
-# 2.C: HYPEBEAST.com ingest and analysis -------------------------------------#
+# 2.3: HYPEBEAST.com ingest and analysis -------------------------------------#
 hypebeast = sneaker_site('hypebeast.com', 'https://hypebeast.com/')
 hypebeast.site_calculate()
 hypebeast.display_info()
@@ -332,7 +332,7 @@ print("\nFile successfully exported!")
 #---------------------- PHASE 4: CSV Import & Analysis -----------------------#
 #-----------------------------------------------------------------------------#
 
-# 4.1: Determine all version 1.0 files located in the 'df_exports' directory
+# 4.1: Determine all version 1.0 files located in the 'df_exports' directory--#
 import glob # to read in multiple csv files
 
 
@@ -347,7 +347,7 @@ print("\nTotal amount of files: {}".format(len(csv_list)))
 
 
 
-# 4.2: Read in each csv file into the master dataframe
+# 4.2: Read in each csv file into the master dataframe -----------------------#
 master_df = pd.DataFrame(columns=['date', 'category_name', 'item', 'count'])
 
 # extract the four columns from each csv file and append to 'master_df'
@@ -363,8 +363,7 @@ master_df.head(25)
 
 
 
-# 4.3: Invoke plotting functions to depict visualizations
-
+# 4.3: Invoke plotting functions to depict visualizations --------------------#
 # plot individual linear regression analysis for each shoe company
 pf.timeseries_line_chart(master_df, 'Nike', 'Nike Timeseries')
 pf.timeseries_line_chart(master_df, 'Adidas', 'Adidas Timeseries')
@@ -384,7 +383,7 @@ print("\n Displaying timeseries summary by shoe company ...")
 # time series line chart categorized by shoe company
 pf.multiple_line_series(master_df, 'Historical Timeseries')
 
-
+# 4.3: Invoke plotting functions to depict visualizations --------------------#
 
 
 
