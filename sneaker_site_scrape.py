@@ -362,8 +362,14 @@ master_df['date'] = master_df['date'].astype('datetime64[ns]')
 master_df.dtypes
 master_df.head(25)
 
-# 4.2.2: Unstack the master dataframe -#
+# 4.2.2: Unstack the master dataframe for category_name & item dfs-#
+category_df = master_df[['date','category_name','count']]
+item_df = master_df[['date','item','count']]
 
+unstack_df = category_df.pivot_table(index = ['date'], 
+                                   columns = 'category_name',
+                                   values = 'count',
+                                   aggfunc='first').reset_index().rename_axis(None, axis=1)
 
 
 # 4.3: Invoke plotting functions to depict visualizations --------------------#
