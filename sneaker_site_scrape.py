@@ -348,6 +348,7 @@ print("\nTotal amount of files: {}".format(len(csv_list)))
 
 
 # 4.2: Read in each csv file into the master dataframe -----------------------#
+# 4.2.1: read in the local files and aggregate as a single dataframe -#
 master_df = pd.DataFrame(columns=['date', 'category_name', 'item', 'count'])
 
 # extract the four columns from each csv file and append to 'master_df'
@@ -361,31 +362,28 @@ master_df['date'] = master_df['date'].astype('datetime64[ns]')
 master_df.dtypes
 master_df.head(25)
 
+# 4.2.2: Unstack the master dataframe -#
 
-category_count_df = master_df[['category_name', 'count']]
-category_count_df.head(5)
 
-item_count_df = master_df[['item', 'count']]
-item_count_df.head(5)
 
 # 4.3: Invoke plotting functions to depict visualizations --------------------#
 
-# 4.3.1: plot individual linear regression analysis for each shoe company ----#
+# 4.3.1: plot individual linear regression analysis for each shoe company -#
 pf.timeseries_line_chart(master_df, 'Nike', 'Nike Timeseries')
 pf.timeseries_line_chart(master_df, 'Adidas', 'Adidas Timeseries')
 pf.timeseries_line_chart(master_df, 'New Balance', 'New Balance Timeseries')
 pf.timeseries_line_chart(master_df, 'Puma', 'Puma Timeseries')
 pf.timeseries_line_chart(master_df, 'Vans', 'Nike Timeseries')
 
-# 4.3.2: sorted bar chart ----------------------------------------------------#
+# 4.3.2: sorted bar chart -#
 print("\n Displaying total history of shoe company mentions ...")
 pf.bar_chart(master_df,'category_name', 'count', 'Historical Bar Chart Report')
 
-# 4.3.3: percentage pie chart ------------------------------------------------#
+# 4.3.3: percentage pie chart -#
 print("\n Displaying percentage breakdown by shoe companies...")
 pf.pie_chart(master_df,'category_name', 'count', 'Historical Pie Report')
 
-# 4.3.4: time series line chart categorized by shoe company ------------------#
+# 4.3.4: time series line chart categorized by shoe company -#
 print("\n Displaying timeseries summary by shoe company ...")
 pf.multiple_line_series(master_df, 'Historical Timeseries')
 
