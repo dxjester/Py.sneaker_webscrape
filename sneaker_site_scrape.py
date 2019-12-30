@@ -22,6 +22,9 @@ import pprint
 from datetime import date 
 from bs4 import BeautifulSoup
 import matplotlib.pyplot as plt
+import seaborn as sns
+
+# external python files
 import plot_functions as pf
 import text_functions as tf
 # from collections import Counter
@@ -362,16 +365,41 @@ master_df['date'] = master_df['date'].astype('datetime64[ns]')
 master_df.dtypes
 master_df.head(25)
 
-# 4.2.2: Unstack the master dataframe for category_name & item dfs-#
-category_df = master_df[['date','category_name','count']]
-item_df = master_df[['date','item','count']]
+# group by sum the master_df dataframe for follow-on analysis
+master_sum_df = master_df.groupby(['date','category_name', 'item']).sum().reset_index()
+summarized_df = master_sum_df[master_sum_df['count'] != 0]
+summarized_df.head(5)
 
-unstack_df = category_df.pivot_table(index = ['date'], 
+sns.pairplot(summarized_df)
+
+# 4.2.2: Unstack the master dataframe for category_name df -#
+category_df = master_df[['date','category_name','count']]
+category_df = category_df.groupby(['date','category_name']).sum().reset_index()
+category_df.head(20)
+
+unstack_category_df = category_df.pivot_table(index = ['date'], 
                                    columns = 'category_name',
                                    values = 'count',
                                    aggfunc='first').reset_index().rename_axis(None, axis=1)
 
+unstack_category_df.tail(50)
+sns.pairplot(unstack_category_df) # pairplot the category dataframe
 
+# 4.2.3: Unstack the master dataframe for item df -#
+item_temp_df = master_df[['date','item','count']]
+item2_df = item_temp_df.groupby(['date', 'item']).sum().reset_index()
+
+# remove rows where count is equal to '0'
+item_df = item2_df[item2_df['count'] != 0]
+item_df.head(20)
+
+unstack_item_df = item_df.pivot_table(index = ['date'],
+                                      columns = 'item',
+                                      values = 'count',
+                                      aggfunc='first').reset_index().rename_axis(None, axis=1)
+
+unstack_item_df.tail(50)
+sns.pairplot(unstack_item_df) # pairplot the item dataframe
 # 4.3: Invoke plotting functions to depict visualizations --------------------#
 
 # 4.3.1: plot individual linear regression analysis for each shoe company -#
@@ -392,8 +420,6 @@ pf.pie_chart(master_df,'category_name', 'count', 'Historical Pie Report')
 # 4.3.4: time series line chart categorized by shoe company -#
 print("\n Displaying timeseries summary by shoe company ...")
 pf.multiple_line_series(master_df, 'Historical Timeseries')
-
-
 
 
 
