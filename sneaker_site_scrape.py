@@ -73,11 +73,11 @@ class sneaker_site:
         # ['Nike', 'Air', 'Max', 'Jordan', 'Zoom', 'React', 'Shox', 'ACG', 'Max Plus', 'Joyride', 'Tinker', 'Force', 'Westbrook', 'Kyrie','Lebron', 'Durant', 'SB', 'Air Max 90', 'Air Max 97', 'Air Max 1', 'Kyrie', 'Air Max 270', 'Travis Scott' ]
 
         # default Adidas list with different Adidas shoe companies
-        self.adidas_master = ['adidas', 'reebok', 'ADIDAS', 'Yeezy', 'Kanye', 'adidas', 'kanye', 'yeezy']
+        self.adidas_master = ['adidas', 'reebok', 'adidas', 'kanye', 'yeezy']
         # ['Adidas', 'ADIDAS', 'adidas', 'Yeezy', 'Kanye', 'Ultraboost', 'EQT', 'NMD', 'Ultra Boost', 'FYW', 'Harden']
         
         # default New Balance list 
-        self.new_balance_master = ['New Balance', 'NB', 'new balance']
+        self.new_balance_master = ['NB', 'new balance']
         # ['New Balance', 'NB', 'Balance', '997', '801']
         
         # default Puma LIst
@@ -339,12 +339,16 @@ print("\nFile successfully exported!")
 import glob # to read in multiple csv files
 
 
-print("\nRetrieving version 2.0 csv files ...")
+print("\nRetrieving version 1.0 csv files ...")
 
 csv_list = [] # store values in the list
-for csv_file in glob.glob('df_exports/v1_*.csv'): # only retrieve "v1_" csv files
-    csv_list.append(csv_file)
-    print ("\n", csv_file)
+for csv_file_v1 in glob.glob('df_exports/v1_*.csv'): # only retrieve "v1_" csv files
+    csv_list.append(csv_file_v1)
+    print (csv_file_v1)
+    
+for csv_file_v2 in glob.glob('df_exports/v2_*.csv'): # only retrieve "v2_" csv files
+    csv_list.append(csv_file_v2)
+    print (csv_file_v2)
 
 print("\nTotal amount of files: {}".format(len(csv_list)))
 
@@ -372,7 +376,7 @@ summarized_df.head(5)
 
 sns.pairplot(summarized_df)
 
-# 4.2.2: Unstack the master dataframe for category_name df -#
+# 4.2.2: Unstack and pairplot the master dataframe for category_name df - #
 category_df = master_df[['date','category_name','count']]
 category_df = category_df.groupby(['date','category_name']).sum().reset_index()
 category_df.head(20)
@@ -385,7 +389,7 @@ unstack_category_df = category_df.pivot_table(index = ['date'],
 unstack_category_df.tail(50)
 sns.pairplot(unstack_category_df) # pairplot the category dataframe
 
-# 4.2.3: Unstack the master dataframe for item df -#
+# 4.2.3: Unstack and pairplot the master dataframe for item df - #
 item_temp_df = master_df[['date','item','count']]
 item2_df = item_temp_df.groupby(['date', 'item']).sum().reset_index()
 
@@ -400,6 +404,7 @@ unstack_item_df = item_df.pivot_table(index = ['date'],
 
 unstack_item_df.tail(50)
 sns.pairplot(unstack_item_df) # pairplot the item dataframe
+
 # 4.3: Invoke plotting functions to depict visualizations --------------------#
 
 # 4.3.1: plot individual linear regression analysis for each shoe company -#
