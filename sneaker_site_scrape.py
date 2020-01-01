@@ -405,8 +405,8 @@ unstack_item_df = item_df.pivot_table(index = ['date'],
 unstack_item_df.tail(50)
 sns.pairplot(unstack_item_df) # pairplot the item dataframe
 
-# 4.3: Invoke plotting functions to depict visualizations --------------------#
 
+# 4.3: Invoke plotting functions to depict visualizations --------------------#
 # 4.3.1: plot individual linear regression analysis for each shoe company -#
 pf.timeseries_line_chart(master_df, 'Nike', 'Nike Timeseries')
 pf.timeseries_line_chart(master_df, 'Adidas', 'Adidas Timeseries')
