@@ -72,7 +72,7 @@ def pie_chart(df, x_axis, y_axis, title):
     plt.show()
 
 
-def linear_reg_sns(df)
+def linear_reg_sns(df):
     X = (df.index -  df.index[0]).days.reshape(-1, 1)
     ax = sns.regplot(x="total_bill", y="tip", data=tips)
 
@@ -99,19 +99,3 @@ def multiple_line_series(df, title):
     plot_df.plot()
     
     
-def make_scatter_plot (df, x="x_1", y="x_2", hue="label",
-                       palette={0: "red", 1: "olive", 2: "blue", 3: "green"},
-                       size=5,
-                       centers=None):
-    from seaborn import lmplot
-    from matplotlib.pyplot import scatter
-    if (hue is not None) and (hue in df.columns):
-        lmplot (x=x, y=y, hue=hue, data=df, palette=palette,
-                fit_reg=False)
-    else:
-        lmplot (x=x, y=y, data=df, fit_reg=False)
-
-    if centers is not None:
-        scatter (centers[:,0], centers[:,1],
-                 marker=u'*', s=500,
-                 c=[palette[0], palette[1]])

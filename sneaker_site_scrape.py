@@ -405,6 +405,16 @@ unstack_item_df = item_df.pivot_table(index = ['date'],
 unstack_item_df.tail(50)
 sns.pairplot(unstack_item_df) # pairplot the item dataframe
 
+# 4.2.4: Date and Count dataframe
+date_count_temp = master_df[['date','count']]
+date_count_df = date_count_temp.groupby('date').sum().reset_index()
+date_count_df
+
+date_count_df.set_index('date', inplace=True)
+date_count_df.plot()
+plt.plot(date_count_df)
+
+
 
 # 4.3: Invoke plotting functions to depict visualizations --------------------#
 # 4.3.1: plot individual linear regression analysis for each shoe company -#
@@ -427,14 +437,13 @@ print("\n Displaying timeseries summary by shoe company ...")
 pf.multiple_line_series(master_df, 'Historical Timeseries')
 
 
-
 print("\n End of Program!")
 
-
+# "If you and Chuck Norris both have 5 dollars, he still has more money that you."
 # --------------------------- END OF PROGRAM ---------------------------------#
 
 
-# "If you and Chuck Norris both have 5 dollars, he still has more money that you."
+
 
 
 # TESTING AREA ---------------------------------------------------------------#
