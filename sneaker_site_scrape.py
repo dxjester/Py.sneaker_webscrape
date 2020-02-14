@@ -313,7 +313,7 @@ day_master.head(10)
 pf.bar_chart(day_master,'category_name', 'count', 'Consolidated Bar Chart Report')
 pf.pie_chart(day_master,'category_name', 'count', 'Consolidated Pie Report')
 
-path = '/Users/patrickbenitez/Desktop/GT/Codebook/Git/Py.sneakernews.webscrape/df_exports'
+path = '/Users/patrickbenitez/Desktop/GT/Codebook/Git/Py.sneakernews.webscrape/df_exports/'
 # Converting date into DD-MM-YYYY format
 temp_date = datetime.datetime.today()
 
