@@ -39,7 +39,7 @@ def bar_chart(df, x_axis, y_axis, title):
     x_length = len(x_val)
     
     # begin bar chart 
-    fig = plt.figure()
+    fig = plt.figure(figsize = (12,8))
     ax = fig.add_subplot(111)
     #cr = ['red', 'grey', 'blue', 'green', 'orange']
     cr = color_list[:x_length]
@@ -68,8 +68,9 @@ def pie_chart(df, x_axis, y_axis, title):
     
     x_length = len(x_val)
     cr = color_list[:x_length]
+    plt.figure(figsize = (12,8))
     plt.pie(y_val, labels=x_val, colors=cr, autopct='%1.1f%%', shadow=True, startangle=140)
-    
+    plt.title(title)
     plt.axis('equal')
     plt.show()
 
@@ -89,8 +90,9 @@ def timeseries_line_chart(df, shoe_company, title):
     filtered_df = temp_df[['date','count']]
     group_df = filtered_df.groupby(['date']).sum().reset_index()
     plot_df = pd.pivot_table(group_df,values='count',index='date')
-    plot_df.plot()
-    
+    fig = plot_df.plot(figsize = (12,8), title = title)
+    return fig 
+
 def multiple_line_series(df, title):
     #color_list = ['palegreen','lightsteelblue','wheat','turquoise','silver', 'salmon','palegreen', 'peachpuff']
     temp_df = df[['date','category_name','count']]
@@ -98,8 +100,9 @@ def multiple_line_series(df, title):
     plot_df = pd.pivot_table(group_df,values='count',index='date',columns='category_name')
     #plot_df = temp_df.pivot(index='date', columns='category_name', values='count')
     #return df
-    plot_df.plot()
+    plot_df.plot(figsize = (12,8), title = title)
     
+
 def genSankey(df,cat_cols=[],value_cols='',title='Sankey Diagram'):
     # maximum of 6 value cols -> 6 colors
     colorPalette = ['#4B8BBE','#306998','#FFE873','#FFD43B','#646464']
