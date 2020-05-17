@@ -1,8 +1,8 @@
 from cryptography.fernet import Fernet
-# Put this somewhere safe!
-print("Test")
+
 key = Fernet.generate_key()
 key
+
 f = Fernet(key)
 f
 
